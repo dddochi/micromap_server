@@ -4,12 +4,9 @@ import com.example.micromap.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +27,12 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
         jdbcInsert.withTableName("member");
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("id", member.getUser_id());
+        parameters.put("id", member.getUserId());
         parameters.put("password", member.getPassword());
 
 //        String key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 //        member.setUser_id(key.StringValue());
+        jdbcInsert.execute(parameters);  // Execute the insert operation
 
         return member;
     }
@@ -51,24 +49,38 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
     }
 
     @Override
-    public Member delete(Member member) {
-        return null;
+    public String delete(String id) {
+        //jdbc templates - 삽입/수정/삭제 : update()사용
+        String delete_sql = "delete member where id = ?";
+        jdbcTemplate.update(delete_sql, id);
+        return id;
     }
 
     @Override
-    public Member updateId(Member member) {
-        return null;
+    public Optional<Member> updateId(String previous_id, String new_id) {
+        //기존 id, 새로운 id
+        String update_id = "update member set id=? where id = ?";
+        jdbcTemplate.update(update_id, new_id, previous_id);
+
+        //아이디 바뀌었는지 확인
+        String check_query = "select * from member where id = ?";
+        List<Member> result = jdbcTemplate.query(check_query,  memberRowMapper(), new_id);
+        return result.stream().findAny();
     }
 
     @Override
-    public Member updatePassword(Member member) {
-        return null;
+    public Optional<Member> updatePassword(Member member, String new_password) {
+
+        String update_password = "update member set password=? where id = ?";
+        jdbcTemplate.update(update_password, new_password, member.getUserId());
+        List<Member> result= jdbcTemplate.query("select * from member where id=? AND password=?",  memberRowMapper(), member.getUserId(), new_password);
+        return result.stream().findAny();
     }
 
     private RowMapper<Member> memberRowMapper(){
         return (rs, rowNum) -> {
             Member member = new Member();
-            member.setUser_id(rs.getString("id"));
+            member.setUserId(rs.getString("id"));
             member.setPassword(rs.getString("password"));
             return member;
         };

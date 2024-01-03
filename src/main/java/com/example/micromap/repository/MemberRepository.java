@@ -12,10 +12,10 @@ public interface MemberRepository {
 
     List<Member> findAll();
 
-    Member delete(Member member);
+    String delete(String id);
 
-    Member updateId(Member member);
+    Optional<Member> updateId(String previous_id, String new_id);
 
-    Member updatePassword(Member member);
+    Optional <Member> updatePassword(Member member, String new_password);
 
 }

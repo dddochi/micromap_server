@@ -2,7 +2,7 @@ package com.example.micromap.domain;
 
 public class Member {
     //아이디
-    private String user_id;
+    private String userId;
 
     //비밀번호
     private String password;
@@ -16,12 +16,12 @@ public class Member {
     //주문 기록 list - 과거, 현재
 
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
