@@ -77,9 +77,11 @@ public class RestaurantController {
         return restaurantService.updateRestaurant(restaurant);
     }
     @GetMapping("select_restaurant_by_id")
-    public Optional<Restaurant> selectRestaurantById(@RequestParam Map<String, Object> requestParam){
-        Long restaurant_id = (Long) Long.parseLong((String) requestParam.get("restaurant_id"));
-        return restaurantService.selectRestaurantById(restaurant_id);
+    public Optional<Restaurant> selectRestaurantById(@RequestParam(name = "restaurant_id") String restaurant_id){
+        //두 방식 다 성공
+        //@RequestParam Map<String, Object> requestParam
+        //Long restaurant_id = (Long) Long.parseLong((String) requestParam.get("restaurant_id"));
+        return restaurantService.selectRestaurantById(Long.parseLong(restaurant_id));
     }
 
 }
