@@ -51,7 +51,7 @@ CREATE TABLE orders(
     created_at TIMESTAMP,
     is_accepted boolean,
     is_finished boolean,
-    status varchar(100),
+    is_taken boolean,
     price double,
     is_pay boolean,
     pay_info varchar(500),

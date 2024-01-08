@@ -1,9 +1,6 @@
 package com.example.micromap;
 
-import com.example.micromap.repository.JdbcTemplateMemberRepository;
-import com.example.micromap.repository.JdbcTemplateRestaurantRepository;
-import com.example.micromap.repository.MemberRepository;
-import com.example.micromap.repository.RestaurantRepository;
+import com.example.micromap.repository.*;
 import com.example.micromap.service.MemberService;
 import com.example.micromap.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +34,10 @@ public class SpringConfig {
     @Bean
     public RestaurantRepository restaurantRepository(){
         return new JdbcTemplateRestaurantRepository(dataSource);
+    }
+
+    @Bean
+    public OrderRepository orderRepository(){
+        return new JdbcTemplateOrderRepository(dataSource);
     }
 }

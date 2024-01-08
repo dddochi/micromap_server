@@ -9,7 +9,7 @@ public class Order {
     private LocalDateTime createdAt;
     private Boolean isAccepted;
     private Boolean isFinished;
-    private String status;
+    private Boolean isTaken;
     private double price;
     private Boolean isPay;
     private String payInfo;
@@ -62,12 +62,12 @@ public class Order {
         isFinished = finished;
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getTaken() {
+        return isTaken;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setTaken(Boolean taken) {
+        isTaken = taken;
     }
 
     public double getPrice() {
