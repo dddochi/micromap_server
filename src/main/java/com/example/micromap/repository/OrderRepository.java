@@ -13,9 +13,9 @@ public interface OrderRepository {
     Long createOrder(Order order);
 
     //주문 상태 업데이트
-    String acceptOrder(Long order_id, Long restaurant_id, boolean isAccepted); // 주문 수락(Accept)
-    String finishOrder(Long order_id, Long restaurant_id, boolean isFinished); //주문 완료(Finish)
-    String takenOrder(Long order_id, Long restaurant_id, boolean isTaken); //주문 픽업(taken)
+    String acceptOrder(Long order_id, Long restaurant_id, boolean is_accepted); // 주문 수락(Accept)
+    String finishOrder(Long order_id, Long restaurant_id, boolean is_finished); //주문 완료(Finish)
+    String takenOrder(Long order_id, Long restaurant_id, boolean is_taken); //주문 픽업(taken)
 
     //주문 기록 조회
     List<Order> selectOrderRecordsOfUser(String user_id); //유저 주문 기록 조회(All)
