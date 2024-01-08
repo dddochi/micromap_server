@@ -2,16 +2,18 @@ package com.example.micromap.controller;
 
 import com.example.micromap.domain.Member;
 import com.example.micromap.service.MemberService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+
+@Tag(name = "Member API", description = "Swagger Test API For Member")
+@RequestMapping("/")
 @RestController
 public class MemberController {
     private final MemberService memberService;

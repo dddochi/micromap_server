@@ -42,3 +42,19 @@ CREATE TABLE restaurant (
     status_id INT,
     FOREIGN KEY (status_id) REFERENCES status(status_id)
 );
+
+--Orders Table
+CREATE TABLE orders(
+    order_id bigint auto_increment primary key,
+    user_id varchar(255),
+    restaurant_id bigint,
+    created_at TIMESTAMP,
+    is_accepted boolean,
+    is_finished boolean,
+    status varchar(100),
+    price double,
+    is_pay boolean,
+    pay_info varchar(500),
+    foreign key (user_id) references member(id),
+    foreign key (restaurant_id) references restaurant(restaurant_id)
+    );

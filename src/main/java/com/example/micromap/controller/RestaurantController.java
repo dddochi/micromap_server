@@ -2,6 +2,8 @@ package com.example.micromap.controller;
 
 import com.example.micromap.domain.Restaurant;
 import com.example.micromap.service.RestaurantService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,8 @@ import java.time.LocalTime;
 import java.util.Map;
 import java.util.Optional;
 
+@Tag(name = "restaurant_API", description = "Swagger Test API For Restaurant")
+//@RequestMapping("/restaurant")
 @RestController
 public class RestaurantController {
 
@@ -19,6 +23,7 @@ public class RestaurantController {
         this.restaurantService = restaurantService;
     }
 
+    @Operation(summary = "insert_restaurant")
     @PostMapping("/insert_restaurant")
     public Long insertRestaurant(@RequestBody Map<String, Object> requestData){
         String restaurant_name = (String) requestData.get("restaurant_name");
