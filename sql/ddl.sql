@@ -58,3 +58,12 @@ CREATE TABLE orders(
     foreign key (user_id) references member(id),
     foreign key (restaurant_id) references restaurant(restaurant_id)
     );
+
+--Like Table
+CREATE TABLE likes(
+    number_of_likes BIGINT ,
+    user_id varchar(255),
+    restaurant_id BIGINT PRIMARY KEY,
+    FOREIGN KEY (user_id) REFERENCES member(id),
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
+    );
