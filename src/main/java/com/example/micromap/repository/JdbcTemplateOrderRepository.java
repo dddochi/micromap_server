@@ -105,6 +105,8 @@ public class JdbcTemplateOrderRepository implements OrderRepository{
         return result;
     }
 
+    //Delete order
+
     private RowMapper<Order> orderRowMapper(){
         return (rs, rowNum) -> {
           Order order = new Order();

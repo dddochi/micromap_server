@@ -61,9 +61,28 @@ CREATE TABLE orders(
 
 --Like Table
 CREATE TABLE likes(
-    number_of_likes BIGINT ,
+    number_of_likes BIGINT,
     user_id varchar(255),
     restaurant_id BIGINT PRIMARY KEY,
     FOREIGN KEY (user_id) REFERENCES member(id),
     FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
+    );
+
+--Appointment Table
+CREATE TABLE APPOINTMENT(
+    appointment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    label varchar(255),
+    restaurant_id BIGINT,
+    user_id varchar(255),
+    date TIMESTAMP,
+    is_finished boolean,
+    FOREIGN KEY (user_id) REFERENCES member(id)
+    );
+
+CREATE TABLE group_member(
+    appointment_id BIGINT PRIMARY KEY,
+    user_id varchar(255),
+    friend_id varchar(255),
+    FOREIGN KEY (user_id) REFERENCES member(id),
+    FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id)
     );

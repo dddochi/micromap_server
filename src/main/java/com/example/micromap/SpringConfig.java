@@ -51,4 +51,7 @@ public class SpringConfig {
     public LikeService likeService(){return new LikeService(likeRepository());}
     @Bean
     public LikeRepository likeRepository(){return new JdbcTemplateLikeRepository(dataSource);}
+
+    @Bean
+    public AppointmentRepository appointmentRepository(){ return new JdbcTemplateAppointmentRepository(dataSource);}
 }
