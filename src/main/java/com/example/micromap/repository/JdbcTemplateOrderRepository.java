@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,15 +94,24 @@ public class JdbcTemplateOrderRepository implements OrderRepository{
 
     @Override
     public List<Order> selectOrderListOfUserByNow(String user_id, LocalDateTime date) {
-        String sql = "SELECT * FROM orders WHERE user_id = ? AND created_at = ? AND (is_accepted = false OR is_finished = false OR is_taken = false)";
-        List<Order> result = jdbcTemplate.query(sql, orderRowMapper(), user_id, date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateString = date.format(formatter);
+        String nextDateString = date.plusDays(1).format(formatter);
+        String sql = "SELECT * FROM orders WHERE user_id = ? AND created_at >= '"+dateString+" 00:00:00' AND created_at < '" +nextDateString + "' AND (is_accepted = false OR is_finished = false OR is_taken = false)";
+        List<Order> result = jdbcTemplate.query(sql, orderRowMapper(), user_id);
+        System.out.println(sql);
+        System.out.println(dateString);
+        System.out.println(nextDateString);
         return result;
     }
 
     @Override
     public List<Order> selectOrderListOfRestaurantByNow(Long restaurant_id, LocalDateTime date) {
-        String sql = "SELECT * FROM orders WHERE restaurant_id = ? AND created_at = ? AND (is_accepted = false OR is_finished = false OR is_taken = false)";
-        List<Order> result = jdbcTemplate.query(sql, orderRowMapper(), restaurant_id, date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateString = date.format(formatter);
+        String nextDateString = date.plusDays(1).format(formatter);
+        String sql = "SELECT * FROM orders WHERE restaurant_id = ? AND created_at >= '"+dateString+" 00:00:00' AND created_at < '" +nextDateString + "' AND (is_accepted = false OR is_finished = false OR is_taken = false)";
+        List<Order> result = jdbcTemplate.query(sql, orderRowMapper(), restaurant_id);
         return result;
     }
 

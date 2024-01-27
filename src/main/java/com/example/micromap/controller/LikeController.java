@@ -1,6 +1,7 @@
 package com.example.micromap.controller;
 
 import com.example.micromap.service.LikeService;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +20,20 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    @PostMapping("/increase_like")
-    public Long increaseLike(@RequestBody Map<String, Object> requestData){
-        Long restaurant_id = (Long) requestData.get("restaurant_id");
-        return likeService.increaseLike(restaurant_id);
-    }
+//    @PostMapping("/increase_like")
+//    public Long increaseLike(@RequestBody Map<String, Object> requestData){
+//        Long restaurant_id = (Long) requestData.get("restaurant_id");
+//        return likeService.increaseLike(restaurant_id);
+//    }
+
+@RequestMapping(value = "/increase_like/{restaurant_id}", method = RequestMethod.POST)
+public Long increaseLike(
+        @Parameter(description = "가게 아이디")
+        @PathVariable(name = "restaurant_id") Long restaurant_id
+){
+
+    return likeService.increaseLike(restaurant_id);
+}
 
     @PostMapping("/decrease_like")
     public Long decreaseLike(@RequestBody Map<String, Object> requestData){
