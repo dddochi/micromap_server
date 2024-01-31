@@ -25,4 +25,6 @@ public interface OrderRepository {
     List<Order> selectOrderListOfUserByNow(String user_id, LocalDateTime date); // 지금 진행중인 주문 조회 - 유저
     List<Order> selectOrderListOfRestaurantByNow(Long restaurant_id, LocalDateTime date); //지금 진행중인 주문 조회 - 가게
 
+    String deleteOrder(Long order_id); //주문 삭제 - return "삭제되었습니다"
+
 }

@@ -50,4 +50,8 @@ public class OrderService {
     public List<Order> restaurantOrderRecordsByNow(Long restaurant_id, LocalDateTime date){
         return orderRepository.selectOrderListOfRestaurantByNow(restaurant_id, date);
     }
+
+    public String deleteOrder(Long order_id){
+        return orderRepository.deleteOrder(order_id);
+    }
 }

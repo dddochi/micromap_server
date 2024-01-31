@@ -115,6 +115,12 @@ public class JdbcTemplateOrderRepository implements OrderRepository{
         return result;
     }
 
+    public String deleteOrder(Long order_id){
+        String sql = "DELETE orders WHERE order_id = ?";
+        jdbcTemplate.update(sql, order_id);
+        return "주문이 삭제되었습니다.";
+    }
+
     //Delete order
 
     private RowMapper<Order> orderRowMapper(){

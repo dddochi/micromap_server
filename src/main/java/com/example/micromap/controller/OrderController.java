@@ -86,7 +86,7 @@ public class OrderController {
 //
 //        return orderService.updateOrderToAccepted(order_id, restaurant_id, is_accepted);
 //    }
-@RequestMapping(value = "update_accepted/{order_id}/{restaurant_id}/{is_accepted}", method = RequestMethod.POST)
+@RequestMapping(value = "update_accepted/{order_id}/{restaurant_id}/{is_accepted}", method = RequestMethod.PUT)
 public String updateAccepted(
         @Parameter(description = "주문 아이디")
         @PathVariable(name = "order_id", required = true) Long order_id,
@@ -107,7 +107,7 @@ public String updateAccepted(
 //
 //        return orderService.updateOrderToFinished(order_id, restaurant_id, is_finished);
 //    }
-@RequestMapping(value = "update_finished/{order_id}/{restaurant_id}/{is_accepted}", method = RequestMethod.POST)
+@RequestMapping(value = "update_finished/{order_id}/{restaurant_id}/{is_accepted}", method = RequestMethod.PUT)
 public String updateFinished(
         @Parameter(description = "주문 아이디")
         @PathVariable(name = "order_id", required = true) Long order_id,
@@ -128,7 +128,7 @@ public String updateFinished(
 //
 //        return orderService.updateOrderToTaken(order_id, restaurant_id, is_taken);
 //    }
-@RequestMapping(value = "update_taken/{order_id}/{restaurant_id}/{is_accepted}", method = RequestMethod.POST)
+@RequestMapping(value = "update_taken/{order_id}/{restaurant_id}/{is_accepted}", method = RequestMethod.PUT)
 public String updateTaken(
         @Parameter(description = "주문 아이디")
         @PathVariable(name = "order_id", required = true) Long order_id,
@@ -228,6 +228,14 @@ public List<Order> restaurantOrderListNow(
         @PathVariable(name = "date") LocalDateTime date
 ){
     return orderService.restaurantOrderRecordsByNow(restaurant_id, date);
+}
+
+@RequestMapping(value = "delete_order/{order_id}", method = RequestMethod.DELETE)
+public String deleteOrder(
+        @Parameter(description = "주문 아이디")
+        @PathVariable(name = "order_id") Long order_id
+){
+        return orderService.deleteOrder(order_id);
 }
 
 }

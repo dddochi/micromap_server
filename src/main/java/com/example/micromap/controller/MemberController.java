@@ -77,7 +77,7 @@ public String signUp(
 //        String id = (String) requestData.get("id");
 //        return memberService.deleteMember(id);
 //    }
-    @RequestMapping(value = "/delete_member/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete_member/{id}", method = RequestMethod.DELETE)
     public String deleteMember(@Parameter(description = "사용자 아이디", example = "userId")
                                    @PathVariable(name = "id", required = true) String id){
         return memberService.deleteMember(id);
@@ -89,7 +89,7 @@ public String signUp(
 //        String new_id = (String) requestData.get("new_id");
 //        return memberService.updateId(previous_id, new_id);
 //    }
-    @RequestMapping(value = "/update_id/{previous_id}/{new_id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/update_id/{previous_id}/{new_id}", method = RequestMethod.PUT)
     public Optional<Member> updateId(@Parameter(description = "이전 아이디", example = "previousId")
                                      @PathVariable(name = "previous_id", required = true) String previous_id,
                                      @Parameter(description = "새로운 아이디", example = "newId")
@@ -110,7 +110,7 @@ public String signUp(
 //@RequestMapping(value = "/update_id/{previous_id}/{new_id}", method = RequestMethod.POST)
 //public Optional<Member> updateId(@Parameter(description = "이전 아이디", example = "previousId")
 //                                 @PathVariable(name = "previous_id", required = true) String previous_id,
-    @RequestMapping(value = "/update_password/{id}/{password}/{new_password}", method = RequestMethod.POST)
+    @RequestMapping(value = "/update_password/{id}/{password}/{new_password}", method = RequestMethod.PUT)
     public Optional<Member> updatePassword(
             @Parameter(description = "아이디")
             @PathVariable(name = "id", required = true) String id,
