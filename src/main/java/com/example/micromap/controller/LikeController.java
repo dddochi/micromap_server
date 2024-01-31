@@ -35,9 +35,11 @@ public Long increaseLike(
     return likeService.increaseLike(restaurant_id);
 }
 
-    @PostMapping("/decrease_like")
-    public Long decreaseLike(@RequestBody Map<String, Object> requestData){
-        Long restaurant_id = (Long) requestData.get("restaurant_id");
+    @PostMapping("/decrease_like/{restaurant_id}")
+    public Long decreaseLike(
+            @Parameter(description = "가게 아이디")
+            @PathVariable(name = "restaurant_id") Long restaurant_id
+    ){
         return likeService.decreaseLike(restaurant_id);
     }
 

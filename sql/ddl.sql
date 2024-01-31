@@ -40,7 +40,9 @@ CREATE TABLE restaurant (
     open_hour TIME,
     close_hour TIME,
     status_id INT,
+    number_of_likes BIGINT DEFAULT 0,
     FOREIGN KEY (status_id) REFERENCES status(status_id)
+    FOREIGN KEY (number_of_likes) REFERENCES likes(number_of_likes)
 );
 
 --Orders Table
@@ -61,7 +63,7 @@ CREATE TABLE orders(
 
 --Like Table
 CREATE TABLE likes(
-    number_of_likes BIGINT,
+    number_of_likes BIGINT DEFAULT 0,
     user_id varchar(255),
     restaurant_id BIGINT PRIMARY KEY,
     FOREIGN KEY (user_id) REFERENCES member(id),

@@ -2,10 +2,7 @@ package com.example.micromap;
 
 import com.example.micromap.domain.Order;
 import com.example.micromap.repository.*;
-import com.example.micromap.service.LikeService;
-import com.example.micromap.service.MemberService;
-import com.example.micromap.service.OrderService;
-import com.example.micromap.service.RestaurantService;
+import com.example.micromap.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,5 +50,9 @@ public class SpringConfig {
     public LikeRepository likeRepository(){return new JdbcTemplateLikeRepository(dataSource);}
 
     @Bean
+    public AppointmentService appointmentService(){return new AppointmentService(appointmentRepository());}
+
+    @Bean
     public AppointmentRepository appointmentRepository(){ return new JdbcTemplateAppointmentRepository(dataSource);}
+
 }

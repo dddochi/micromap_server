@@ -20,15 +20,34 @@ public class JdbcTemplateLikeRepository implements LikeRepository{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Override
-    public Long increaseLike(Long restaurant_id) {
-        String increase_sql = "UPDATE likes SET number_of_likes = number_of_likes + 1 WHERE restaurant_id = ?";
-        jdbcTemplate.update(increase_sql, restaurant_id);
+//    @Override
+//    public Long increaseLike(Long restaurant_id) {
+//        String increase_sql = "UPDATE likes SET number_of_likes = number_of_likes + 1 WHERE restaurant_id = ?";
+//        jdbcTemplate.update(increase_sql, restaurant_id);
+//
+//        String select_sql = "SELECT number_of_likes FROM likes WHERE restaurant_id = ?";
+//        Long number_of_likes = jdbcTemplate.queryForObject(select_sql, Long.class, restaurant_id);
+//        return number_of_likes;
+//    }
+@Override
+public Long increaseLike(Long restaurant_id) {
+    String increase_sql = "UPDATE likes SET number_of_likes = number_of_likes + 1 WHERE restaurant_id = ?";
+    jdbcTemplate.update(increase_sql, restaurant_id);
 
-        String select_sql = "SELECT number_of_likes FROM likes WHERE restaurant_id = ?";
-        Long number_of_likes = jdbcTemplate.queryForObject(select_sql, Long.class, restaurant_id);
-        return number_of_likes;
+    String select_sql = "SELECT number_of_likes FROM likes WHERE restaurant_id = ?";
+
+    // Use query method instead of queryForObject
+    List<Long> result = jdbcTemplate.query(select_sql, (rs, rowNum) -> rs.getLong("number_of_likes"), restaurant_id);
+
+    // Check if the result list is empty
+    if (result.isEmpty()) {
+        // Handle the case where no result is found
+        return null; // or return a default value
+    } else {
+        // Return the first (and only) element from the result list
+        return result.get(0);
     }
+}
 
     @Override
     public Long decreaseLike(Long restaurant_id) {
@@ -36,15 +55,32 @@ public class JdbcTemplateLikeRepository implements LikeRepository{
         jdbcTemplate.update(decrease_sql, restaurant_id);
 
         String select_sql = "SELECT number_of_likes FROM likes WHERE restaurant_id = ?";
-        Long number_of_likes = jdbcTemplate.queryForObject(select_sql, Long.class, restaurant_id);
-        return number_of_likes;
+
+        List<Long> result = jdbcTemplate.query(select_sql, (rs, rowNum) -> rs.getLong("number_of_likes"), restaurant_id);
+
+        // Check if the result list is empty
+        if (result.isEmpty()) {
+            // Handle the case where no result is found
+            return null; // or return a default value
+        } else {
+            // Return the first (and only) element from the result list
+            return result.get(0);
+        }
     }
 
     @Override
     public Long selectRestaurantNumberOfLikes(Long restaurant_id) {
         String select_sql = "SELECT number_of_likes FROM likes WHERE restaurant_id = ?";
-        Long number_of_likes = jdbcTemplate.queryForObject(select_sql, Long.class, restaurant_id);
-        return number_of_likes;
+        List<Long> result = jdbcTemplate.query(select_sql, (rs, rowNum) -> rs.getLong("number_of_likes"), restaurant_id);
+
+        // Check if the result list is empty
+        if (result.isEmpty()) {
+            // Handle the case where no result is found
+            return null; // or return a default value
+        } else {
+            // Return the first (and only) element from the result list
+            return result.get(0);
+        }
     }
 
     @Override
