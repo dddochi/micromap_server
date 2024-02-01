@@ -82,7 +82,7 @@ CREATE TABLE APPOINTMENT(
     );
 
 CREATE TABLE group_member(
-    appointment_id BIGINT PRIMARY KEY,
+    appointment_id BIGINT,
     user_id varchar(255),
     friend_id varchar(255),
     FOREIGN KEY (user_id) REFERENCES member(id),

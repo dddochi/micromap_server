@@ -66,6 +66,7 @@ public class JdbcTemplateAppointmentRepository implements AppointmentRepository 
     }
     @Override
     public List<Appointment> selectBeforeAppointmentList(String user_id) {
+
         String sql = "SELECT * FROM appointment WHERE user_id = ? AND is_finished = false";
         List<Appointment> result = jdbcTemplate.query(sql, appointmentRowMapper(), user_id);
         return result;
@@ -80,13 +81,16 @@ public class JdbcTemplateAppointmentRepository implements AppointmentRepository 
     //약속 실행 버튼 클릭 -> is_finished = true
     public String finishAppointment(Long appointment_id){
         String sql = "UPDATE appointment SET is_finished = true WHERE appointment_id = ?";
-        jdbcTemplate.update(sql);
+        jdbcTemplate.update(sql, appointment_id);
         return "Finish appointment";
     }
     //약속 삭제 - 삭제된 아이디 리턴
     public Long deleteAppointment(Long appointment_id){
-        String sql = "DELETE appointment WHERE appointment_id = ?";
-        jdbcTemplate.update(sql, appointment_id);
+        String sql_for_group_member = "DELETE group_member WHERE appointment_id = ?";
+        jdbcTemplate.update(sql_for_group_member, appointment_id);
+        String sql_for_appointment = "DELETE appointment WHERE appointment_id = ?";
+        jdbcTemplate.update(sql_for_appointment, appointment_id);
+
         return appointment_id;
     }
 
