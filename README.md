@@ -25,10 +25,10 @@
 데이터 베이스: h2 database
 <br>
 프론트 : 추후에 Flutter를 통해 만들 예정 
-
+<p align=center>
 <img src="https://img.shields.io/badge/JAVA-007396?style=flat-square&logo=java&logoColor=white">
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=flat-square&logo=springboot&logoColor=black">
-
+</p>
 ## Progress
 완성된 기능
 - 로그인, 유저, 식당, 주문, 약속 : Database & API 완성
