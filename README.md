@@ -39,6 +39,9 @@
 ## API TEST USING SWAGGER
 Swagger를 활용해서 API Test 진행 
 
-![연습이미지](https://github.com/dddochi/micromap_server/blob/main/swagger1.png)
+![swagger1](https://github.com/dddochi/micromap_server/blob/main/swagger1.png)
+![swagger2](https://github.com/dddochi/micromap_server/blob/main/swagger2.png)
+![swagger3](https://github.com/dddochi/micromap_server/blob/main/swagger3.png)
+![swagger4](https://github.com/dddochi/micromap_server/blob/main/swagger4.png)
 
 
